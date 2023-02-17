@@ -1,0 +1,462 @@
+swagger: "2.0"
+info:
+  description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker in"
+  version: "1.0.0"
+  title: "Swagger 1fox"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "1fox@1fox.io"
+
+host: localhost:8080
+basePath: "/content/v1"
+tags:
+- name: "Content"
+  description: "Content formated"
+- name: "Crawl content"
+  description: "Crawl content"
+schemes:
+- "http"
+paths:
+  /content:
+    post:
+      tags:
+      - "Content"
+      summary: "Add a new content from crawl content"
+      description: ""
+      operationId: "addContent"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Schema to add a new content from crawl content"
+        required: true
+        schema:
+          $ref: "#/definitions/Content"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              data:
+                type: "object"
+                $ref: "#/definitions/Content"
+        "400":
+          description: "Validation failed"
+         
+    get:
+      tags:
+      - "Content"
+      description: "Get list content"
+      summary: "Get list content"
+      operationId: "getContents"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              total_count:
+                type: "string"
+              items:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Content"
+
+   
+  /content/{id}:
+    delete:
+      tags:
+      - "Content"
+      description: "Delete content"
+      operationId: "deleteContent"
+      summary: "Delete content"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+      responses:
+        "204":
+          description: "successful operation"
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+    put:
+      tags:
+      - "Content"
+      description: "Update content"
+      summary: "Update content"
+      operationId: "updateContents"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Schema to update a new content from crawl content"
+        required: true
+        schema:
+          $ref: "#/definitions/ContentUpdate"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              data:
+                type: "object"
+                $ref: "#/definitions/Content"
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+    get:
+      tags:
+      - "Content"
+      description: "get content by id"
+      operationId: "getContentById"
+      summary: "Get content by id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+     
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              data:
+                type: "object"
+                $ref: "#/definitions/Content"
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+
+  /content/{id}/pre-check:
+    get:
+      tags:
+      - "Content"
+      description: "Check content is processing"
+      operationId: "checkContent"
+      summary: "Check content is processing"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+    
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              data:
+                type: "boolean"
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+
+  /content/{id}/status:
+    patch:
+      tags:
+      - "Content"
+      description: "Change status"
+      operationId: "checkContent"
+      summary: "Change status"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Schema to update status"
+        required: true
+        schema:
+          $ref: "#/definitions/Status"
+      responses:
+        "204":
+          description: "successful operation"
+         
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+  /content/{id}/approve:
+    patch:
+      tags:
+      - "Content"
+      description: "Approve content"
+      operationId: "approveContent"
+      summary: "Approve content"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+      responses:
+        "204":
+          description: "successful operation"
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+
+  /crawl-content:
+    get:
+      tags:
+      - "Crawl content"
+      description: "Get list crawl content"
+      summary: "Get list crawl content"
+      operationId: "getListCrawContents"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              total_count:
+                type: "string"
+              items:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Content"
+
+  /crawl-content/{id}:  
+    get:
+      tags:
+      - "Crawl content"
+      description: "get crawl content by id"
+      operationId: "getContentById"
+      summary: "Get crawl content by id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+     
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              data:
+                type: "object"
+                $ref: "#/definitions/Content"
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+    delete:
+      tags:
+      - "Crawl content"
+      description: "Delete crawl content"
+      operationId: "deleteContent"
+      summary: "Delete crawl content"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+      responses:
+        "204":
+          description: "successful operation"
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+  /crawl-content/:id/status:
+    patch:
+      tags:
+      - "Crawl content"
+      description: "Change status crawl content"
+      operationId: "deleteContent"
+      summary: "Change status crawl content"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+      responses:
+        "204":
+          description: "successful operation"
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+  /crawl-content/:id/pre-check:
+    patch:
+      tags:
+      - "Crawl content"
+      description: "Check crawl content is processing"
+      operationId: "deleteContent"
+      summary: "Check crawl content is processing"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+      responses:
+        "204":
+          description: "successful operation"
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+  /crawl-content/:id/note:
+    put:
+      tags:
+      - "Crawl content"
+      description: "Admin note crawl content"
+      operationId: "note"
+      summary: "Admin note crawl content"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id that need to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Schema to update a new content from crawl content"
+        required: true
+        schema:
+          $ref: "#/definitions/Note"
+      responses:
+        "204":
+          description: "successful operation"
+        "404":
+          description: "Content not found"
+        "400":
+          description: "Validation failed"
+definitions:
+  Content:
+    type: "object"
+    properties:
+      languageCode:
+        type: "string"
+        enum:
+        - "vi"
+        - "en"
+      contentType:
+        type: "string"
+        enum:
+        - "web"
+        - "telegram"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      tableOfContent:
+        type: "string"
+      body:
+        type: "string"
+      photo:
+        type: "string"
+      note:
+        type: "string"
+      groupId:
+        type: "string"
+      crawlContentId:
+        type: "string"
+      contentId:
+        type: "string"
+    xml:
+      name: "Content"
+  ContentUpdate:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      tableOfContent:
+        type: "string"
+      body:
+        type: "string"
+      photo:
+        type: "string"
+      note:
+        type: "string"
+    xml:
+      name: "ContentUpdate"
+  Status:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+     
+    xml:
+      name: "Status"
+  Note:
+    type: "object"
+    properties:
+      note:
+        type: "string"
+     
+    xml:
+      name: "Note"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

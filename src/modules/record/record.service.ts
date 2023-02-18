@@ -6,17 +6,18 @@ import { RecordModel } from './record.model';
 import { Record, RecordQuery } from './record.type';
 import dayjs from 'dayjs';
 import { toOutput } from '@/utils/common';
+import { Types } from 'mongoose';
 
 @Service()
-export default class MenuService {
-  private logger = new Logger('MenuService');
+export default class RecordService {
+  private logger = new Logger('recordService');
 
   get publicOutputKeys() {
     return ['id', 'weight', 'createdAt'];
   }
 
   /**
-   * Query Menu
+   * Query record
    */
   async query(query: RecordQuery, auth: AuthType): Promise<BaseServiceOutput<Array<Record>>> {
     try {
@@ -26,7 +27,7 @@ export default class MenuService {
             $gte: dayjs(query.start_date).startOf('date').toDate(),
             $lte: dayjs(query.end_date).endOf('date').toDate(),
           },
-          created_by: auth.id,
+          created_by: new Types.ObjectId(auth.id),
         };
         const pipeline = [
           {

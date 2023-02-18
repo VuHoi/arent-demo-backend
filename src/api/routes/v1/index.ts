@@ -6,6 +6,8 @@ import { MenuController, PrivateMenuController } from '@/modules/menu/menu.contr
 import StorageController from '@/modules/storage/storage.controller';
 import { RecordController } from '@/modules/record/record.controller';
 import { ColumnController, PrivateColumnController } from '@/modules/column/column.controller';
+import { DiaryController } from '../../../modules/diary/diary.controller';
+import { ExerciseController } from '../../../modules/exercise/exercise.controller';
 
 const route = Router();
 
@@ -19,5 +21,7 @@ export default (app: Application) => {
     ColumnController,
     RecordController,
     StorageController,
+    DiaryController,
+    ExerciseController,
   ]);
 };

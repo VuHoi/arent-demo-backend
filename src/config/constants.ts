@@ -4,6 +4,8 @@ export const CONTROLLERS = {
   MENU: 'menu',
   RECORD: 'record',
   COLUMN: 'column',
+  DIARY: 'diary',
+  EXERCISE: 'exercise',
 };
 
 export enum STATUS {

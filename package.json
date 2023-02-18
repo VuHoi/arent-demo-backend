@@ -1,5 +1,5 @@
 {
-  "name": "1fox_backend",
+  "name": "demo_backend",
   "version": "1.0.0",
   "private": true,
   "description": "arent ackend",
@@ -45,7 +45,6 @@
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^4.4.0",
     "typedi": "^0.10.0",
-    "typeorm": "^0.3.6",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {

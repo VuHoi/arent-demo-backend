@@ -15,7 +15,7 @@ import YAML from 'yamljs';
 import APIRoutesV1 from '@/api/routes/v1';
 import env from '@/config/env';
 import { DILogger } from '@/loaders/loggerLoader';
-import AppError, { AppErrorLocale } from '@/core/errors/AppError';
+import AppError from '@/core/errors/AppError';
 import { CommonError, UnknownError } from '@/core/errors/CommonError';
 
 const swaggerDocument = YAML.load('swagger.yaml');
@@ -40,9 +40,9 @@ const convertError = (err: any): AppError => {
 /**
  * Build error response
  */
-const buildErrorResponse = (err: AppError, language?: string) => {
+const buildErrorResponse = (err: AppError) => {
   const visibleMessage = env.APP_ENV !== 'production' || err.isPublic;
-  const message = err.locales[language as AppErrorLocale] || err.message;
+  const message = err.message;
   return {
     message: message && visibleMessage ? message : httpStatusCodes[err.status],
     code: err.code,
@@ -56,7 +56,7 @@ const buildErrorResponse = (err: AppError, language?: string) => {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   const error = convertError(err);
-  const errorResponse = buildErrorResponse(error, req.headers['accept-language']);
+  const errorResponse = buildErrorResponse(error);
   return res.status(error.status).json({ error: errorResponse });
 };
 

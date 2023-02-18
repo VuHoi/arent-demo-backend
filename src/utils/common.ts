@@ -1,4 +1,5 @@
-import { BaseQuery } from '@/types/Common';
+import { BaseQuery, BaseServiceOutput } from '@/types/Common';
+import { isNil, pick } from 'lodash';
 
 /**
  * Get runtime config from "process" Nodejs
@@ -29,4 +30,18 @@ export const buildQueryFilter = <T>(reqQuery: BaseQuery & T) => {
     filter,
     query: { page, per_page, sort_by, sort_order },
   };
+};
+
+export const toOutput = (result: any, fields: Array<string>): BaseServiceOutput<any> => {
+  if (!isNil(result.length)) {
+    return {
+      data: result.map((item: any) => {
+        const { _id: id, ...rest } = item;
+        return pick({ ...(rest._doc ? rest._doc : rest), id }, fields);
+      }),
+    };
+  } else {
+    const { _id: id, ...rest } = result;
+    return { data: pick({ ...rest, id }, fields) };
+  }
 };

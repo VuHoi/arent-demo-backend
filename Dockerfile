@@ -13,7 +13,7 @@ RUN yarn --pure-lockfile
 COPY . .
 
 # Expose port
-EXPOSE 5050
+EXPOSE 8080
 
 # Start service
 CMD [ "yarn", "start" ]

@@ -2,6 +2,8 @@ export const DEFAULT_USER_PICTURE = 'https://www.gravatar.com/avatar/default?s=2
 
 export const CONTROLLERS = {
   MENU: 'menu',
+  RECORD: 'record',
+  COLUMN: 'column',
 };
 
 export enum STATUS {

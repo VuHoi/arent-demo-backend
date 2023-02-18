@@ -1,11 +1,12 @@
-import { Schema } from 'mongoose';
-import { User } from '../modules/user/menu.model';
+import { Schema, Types } from 'mongoose';
 
 export const baseSchema = new Schema({
   created_by: {
-    type: User,
+    type: Types.ObjectId,
+    ref: 'User',
   },
   updated_by: {
-    type: User,
+    type: Types.ObjectId,
+    ref: 'User',
   },
 });

@@ -2,21 +2,21 @@ import httpStatusCode from 'http-status';
 import AppError, { AppErrorJSON } from '@/core/errors/AppError';
 
 export const errors = Object.freeze({
-  NO_FILE_UPLOADED: {
-    message: 'No file uploaded',
-    code: null,
-    status: httpStatusCode.BAD_REQUEST,
+  COLUMN_NOT_FOUND: {
+    message: 'Column  not found',
+    code: '3001',
+    status: httpStatusCode.NOT_FOUND,
     isPublic: true,
   },
-  FORMAT_IS_NOT_SUPPORTED: {
-    message: 'The format is not supported',
-    code: null,
-    status: httpStatusCode.BAD_REQUEST,
+  COLUMN_ALREADY_EXIST: {
+    message: 'Column  already exist',
+    code: '3002',
+    status: httpStatusCode.CONFLICT,
     isPublic: true,
   },
 });
 
-export class StorageError extends AppError {
+export class ColumnError extends AppError {
   constructor(msg: keyof typeof errors, errDetails?: AppErrorJSON['details']) {
     super({ ...errors[msg], ...(errDetails && { details: errDetails }) });
   }

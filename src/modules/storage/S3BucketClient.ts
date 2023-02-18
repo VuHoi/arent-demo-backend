@@ -1,8 +1,8 @@
 import { S3ClientConfig, S3 } from '@aws-sdk/client-s3';
 import { Service } from 'typedi';
 import env from '@/config/env';
-import { alphabetSize24 } from '@/utils/randomString';
 import Logger from '@/core/logger';
+import { nanoid } from 'nanoid';
 
 export type UploadFileOptions = {
   originalname: string;
@@ -34,7 +34,7 @@ export default class S3BucketClient {
     // Get extension (e.g. jpg, png,...)
     const ext = extRegex.exec(originalName)[1].toLowerCase();
     // Generate file name (e.g. 64a659f3fc004daf8b631c01aa634382)
-    const name = await alphabetSize24();
+    const name = await nanoid();
     return `${name}.${ext}`;
   }
 

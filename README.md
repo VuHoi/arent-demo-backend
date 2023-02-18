@@ -1,4 +1,4 @@
-# 1fox.co Backend
+# Deni Backend
 
 # Prerequisites
 

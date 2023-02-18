@@ -38,9 +38,8 @@ $ yarn install
 
 ```shell
 # Create local env
-$ cp env.example.json env.local.json
+$ cp env.example .env
 
-# Open "env.local.json" and modify the env variables
 ```
 
 - **Start server**
@@ -51,10 +50,68 @@ $ yarn dev
 
 Happy coding! 🥂
 
-# Testing
+# Database structure
 
-Updating...
+| User        | Type   |
+| ----------- | ------ |
+| username    | String |
+| password    | String |
+| avatar      | String |
+| email       | String |
+| dateOfBirth | String |
+| createdAt   | Date   |
+| updatedAt   | Date   |
 
-# Deployment
+| Record     | Type                |
+| ---------- | ------------------- |
+| weight     | Number              |
+| body       | Number              |
+| status     | `enabled`/`disable` |
+| created_by | `User`              |
+| updated_by | `User`              |
+| createdAt  | Date                |
+| updatedAt  | Date                |
 
-Updating...
+| Menu       | Type   |
+| ---------- | ------ |
+| name       | String |
+| title      | String |
+| order      | Number |
+| icon       | String |
+| level      | Number |
+| created_by | `User` |
+| updated_by | `User` |
+| createdAt  | Date   |
+| updatedAt  | Date   |
+
+| Exercise   | Type   |
+| ---------- | ------ |
+| title      | String |
+| duration   | Number |
+| kcal       | Number |
+| created_by | `User` |
+| updated_by | `User` |
+| createdAt  | Date   |
+| updatedAt  | Date   |
+
+| Diary       | Type   |
+| ----------- | ------ |
+| title       | String |
+| description | String |
+| created_by  | `User` |
+| updated_by  | `User` |
+| createdAt   | Date   |
+| updatedAt   | Date   |
+
+| Column        | Type                      |
+| ------------- | ------------------------- |
+| title         | String                    |
+| image         | String                    |
+| is_recommened | Boolean                   |
+| type          | `diet`/`beauty`/`healthy` |
+| type          | `diet`/`beauty`/`healthy` |
+| tags          | `Array<String>`           |
+| created_by    | `User`                    |
+| updated_by    | `User`                    |
+| createdAt     | Date                      |
+| updatedAt     | Date                      |

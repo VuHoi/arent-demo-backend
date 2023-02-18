@@ -16,9 +16,24 @@ export const privateQuery = validate({
 export const create = validate({
   [Segments.BODY]: Joi.object({
     title: Joi.string().required(),
-    name: Joi.string().required(),
-    level: Joi.number(),
-    order: Joi.number(),
-    icon: Joi.string(),
+    image: Joi.string(),
+    is_recommened: Joi.boolean(),
+    tags: Joi.array().items(Joi.string()),
+  }),
+});
+
+export const update = validate({
+  [Segments.BODY]: Joi.object({
+    title: Joi.string(),
+    image: Joi.string(),
+    is_recommened: Joi.boolean(),
+    tags: Joi.array().items(Joi.string()),
+  }),
+});
+
+export const queryPublic = validate({
+  [Segments.QUERY]: Joi.object({
+    is_recommened: Joi.boolean(),
+    type: Joi.string(),
   }),
 });

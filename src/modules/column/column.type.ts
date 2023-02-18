@@ -8,6 +8,7 @@ export type Column = {
   createdAt?: Date;
   status?: STATUS;
   is_recommened?: boolean;
+  type?: ColumnType;
 };
 
 export type ColumnParams = {
@@ -16,4 +17,12 @@ export type ColumnParams = {
 export interface ColumnQuery extends BaseQuery {
   title?: string;
   tags?: string;
+  is_recommened?: boolean;
+  type?: ColumnType;
+}
+
+export enum ColumnType {
+  DIET = 'diet',
+  BEAUTY = 'beauty',
+  HEALTH = 'healthy',
 }

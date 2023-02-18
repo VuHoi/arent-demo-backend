@@ -13,7 +13,7 @@ export default class ColumnService {
   private logger = new Logger('ColumnService');
 
   get publicOutputKeys() {
-    return ['id', 'title', 'image', 'tags'];
+    return ['id', 'title', 'image', 'tags', 'type'];
   }
 
   get privateOutputKeys() {
@@ -123,9 +123,9 @@ export default class ColumnService {
   /**
    * Query Column
    */
-  async query(): Promise<BaseServiceOutput<Array<Column>>> {
+  async query(filter: Pick<Column, 'is_recommened' | 'type'>): Promise<BaseServiceOutput<Array<Column>>> {
     try {
-      const result = await ColumnModel.find({});
+      const result = await ColumnModel.find(filter);
       this.logger.debug('[query Column:success]');
       return toOutput(result, this.publicOutputKeys);
     } catch (err) {

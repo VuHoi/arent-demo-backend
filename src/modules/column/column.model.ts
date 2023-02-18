@@ -1,6 +1,7 @@
 import { baseSchema } from '@/utils/baseSchema';
 import mongoose, { Schema } from 'mongoose';
 import { STATUS } from '../../config/constants';
+import { ColumnType } from './column.type';
 
 const columnSchema = new Schema(
   {
@@ -16,6 +17,11 @@ const columnSchema = new Schema(
     // is_recommened
     is_recommened: {
       type: Boolean,
+    },
+    // type
+    type: {
+      type: String,
+      enum: ColumnType,
     },
     // hashtags
     tags: [

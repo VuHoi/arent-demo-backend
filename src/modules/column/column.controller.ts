@@ -34,7 +34,7 @@ export class PrivateColumnController {
     res.status(httpStatusCode.OK).json(result);
   }
 
-  @Put('/:id', [authenticated, columnValidation.create])
+  @Put('/:id', [authenticated, columnValidation.update])
   async updatecolumnItem(
     @Res() res: Response,
     @Body() body: Column,
@@ -53,9 +53,9 @@ export class ColumnController {
   private columnService: ColumnService;
 
   // Get column list
-  @Get('/', [])
-  async privateQuery(@Res() res: Response) {
-    const result = await this.columnService.query();
+  @Get('/', [columnValidation.queryPublic])
+  async privateQuery(@Res() res: Response, @Query() query: ColumnQuery) {
+    const result = await this.columnService.query(query);
     res.status(httpStatusCode.OK).json(result);
   }
 }

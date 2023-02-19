@@ -1,4 +1,4 @@
-# Deni Backend
+# Demo Backend
 
 # Prerequisites
 
